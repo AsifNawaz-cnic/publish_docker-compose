@@ -16,7 +16,7 @@ echo "IMAGES: $IMAGES"
 for IMAGE in $IMAGES; do
     echo "IMAGE: $IMAGE"
     
-    NAME=$(basename ${GITHUB_REPOSITORY}).$(docker inspect --format '{{ index .Config.Labels["com.docker.compose.service"] }}' $IMAGE)
+    NAME=$(basename ${GITHUB_REPOSITORY}).$(docker inspect --format '{{ index .Config.Labels "com.docker.compose.project" }}' $IMAGE)
     TAG="ghcr.io/${GITHUB_REPOSITORY}/$NAME:$VERSION"
 
     docker tag $IMAGE $TAG
