@@ -10,16 +10,16 @@ ls -altr
 docker login ghcr.io -u ${GITHUB_REF} -p ${REPO_TOKEN}
 
 VERSION=$VERSION docker-compose -f docker-compose.yml -f $OVERRIDE up --no-start --remove-orphans
-IMAGES=$(docker inspect --format='{{.Image}}' $(docker ps -aq))
+IMAGES=$(docker inspect --format='{{.Name}}' $(docker ps -aq))
 
 echo "IMAGES: $IMAGES"
 for IMAGE in $IMAGES; do
-    echo "IMAGE: $IMAGE"
-    
-    NAME=$(basename ${GITHUB_REPOSITORY}).$(docker inspect --format '{{ index .Config.Labels "name" }}' $IMAGE)
-    TAG="ghcr.io/${GITHUB_REPOSITORY}/$NAME:$VERSION"
-    
-    echo "Name=$NAME"
-    #docker tag $IMAGE $TAG
-    #docker push $TAG
+    NAME=$IMAGE
+    ID=$(docker ps -aqf "NAME=$IMAGE")
+    TAG="ghcr.io/${GITHUB_REPOSITORY}$NAME:$VERSION"
+    echo "ID=$ID"
+    echo "Tag=$TAG"
+    echo "NAME=$NAME"
+    docker tag "$ID" "$TAG"
+    docker push "$TAG"
 done
