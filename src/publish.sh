@@ -7,7 +7,7 @@ echo "OVERRIDE=$OVERRIDE"
 
 docker login ghcr.io -u ${GITHUB_REF} -p ${REPO_TOKEN}
 
-VERSION=$VERSION docker-compose -f ${DOCKER_COMPOSE} -f $OVERRIDE up --no-start --remove-orphans
+VERSION=$VERSION docker-compose -f $DOCKER_COMPOSE -f $OVERRIDE up --no-start --remove-orphans
 IMAGES=$(docker inspect --format='{{.Image}}' $(docker ps -aq))
 
 echo "IMAGES: $IMAGES"
