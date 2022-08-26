@@ -13,7 +13,7 @@ VERSION=$VERSION docker-compose -f docker-compose.yml -f $OVERRIDE up --no-start
 IMAGES=$(docker inspect --format='{{.Image}}' $(docker ps -aq))
 
 echo "IMAGES: $IMAGES"
-exit
+exit 0
 for IMAGE in $IMAGES; do
     echo "IMAGE: $IMAGE"
     
