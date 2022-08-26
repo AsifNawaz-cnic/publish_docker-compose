@@ -20,6 +20,7 @@ for IMAGE in $IMAGES; do
     echo "ID=$ID"
     echo "Tag=$TAG"
     echo "NAME=$NAME"
-    docker tag "$ID" "$TAG"
-    docker push "$TAG"
+    
+    docker tag $ID $TAG
+    docker push $TAG
 done
