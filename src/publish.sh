@@ -5,7 +5,7 @@ REPO_TOKEN="$3"
 echo "VERSION=$VERSION"
 echo "OVERRIDE=$OVERRIDE"
 
-cd .devcontainer
+cd ".devcontainer"
 
 docker login ghcr.io -u ${GITHUB_REF} -p ${REPO_TOKEN}
 
