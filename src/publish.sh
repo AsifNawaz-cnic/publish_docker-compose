@@ -6,7 +6,7 @@ echo "VERSION=$VERSION"
 echo "OVERRIDE=$OVERRIDE"
 
 cd ".devcontainer"
-
+ls -altr
 docker login ghcr.io -u ${GITHUB_REF} -p ${REPO_TOKEN}
 
 VERSION=$VERSION docker-compose -f docker-compose.yml -f $OVERRIDE up --no-start --remove-orphans
