@@ -14,13 +14,13 @@ IMAGES=$(docker inspect --format='{{.Name}}' $(docker ps -aq))
 
 echo "IMAGES: $IMAGES"
 for IMAGE in $IMAGES; do
-    NAME=$IMAGE
+    NAME=${GITHUB_REPOSITORY}.$IMAGE
     ID=$(docker ps -aqf "NAME=$IMAGE")
-    TAG="ghcr.io/${GITHUB_REPOSITORY}$NAME:$VERSION"
+    TAG="ghcr.io/${GITHUB_REPOSITORY}/$NAME:$VERSION"
     echo "ID=$ID"
     echo "Tag=$TAG"
     echo "NAME=$NAME"
     
-    docker tag $ID $TAG
+    docker tag $NAME $TAG
     docker push $TAG
 done
