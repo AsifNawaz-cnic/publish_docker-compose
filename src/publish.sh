@@ -20,6 +20,6 @@ for IMAGE in $IMAGES; do
     TAG="ghcr.io/${GITHUB_REPOSITORY}/$NAME:$VERSION"
     
     echo "Name=$NAME"
-    #docker tag $IMAGE $TAG
-    #docker push $TAG
+    docker tag $IMAGE $TAG
+    docker push $TAG
 done
