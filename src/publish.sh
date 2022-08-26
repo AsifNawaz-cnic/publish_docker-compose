@@ -14,7 +14,7 @@ IMAGES=$(docker inspect --format='{{.Name}}' $(docker ps -aq))
 
 echo "IMAGES: $IMAGES"
 for IMAGE in $IMAGES; do
-    NAME=${GITHUB_REPOSITORY}.$IMAGE
+    NAME=${GITHUB_REPOSITORY}$IMAGE
     ID=$(docker ps -aqf "NAME=$IMAGE")
     TAG="ghcr.io/${GITHUB_REPOSITORY}/$NAME:$VERSION"
     echo "ID=$ID"
