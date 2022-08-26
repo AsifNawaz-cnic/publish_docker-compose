@@ -13,7 +13,6 @@ docker login ghcr.io -u ${GITHUB_REF} -p ${REPO_TOKEN}
 IMAGES=$(docker inspect --format='{{.Image}}' $(docker ps -aq))
 
 echo "IMAGES: $IMAGES"
-exit 0
 for IMAGE in $IMAGES; do
     echo "IMAGE: $IMAGE"
     
